@@ -20,6 +20,8 @@ const TimePicker = () => {
   const [selectedState, setSelectedState] = useState('');
   const [selectedTimeFrom, setSelectedTimeFrom] = useState<Date | null>(null);
   const [selectedTimeTo, setSelectedTimeTo] = useState<Date | null>(null);
+  const [maxDate, setMaxDate] = useState<Date | null>(null);
+  const [minDate, setMinDate] = useState<Date | null>(null);
   const [dates, setDates] = useState<string[]>([]);
   const [times, setTimes] = useState<string[]>([]);
 
@@ -51,6 +53,8 @@ const TimePicker = () => {
           // Parse the date string into a Date object
           setSelectedTimeFrom(moment(response.data?.minDate, 'YYYY-MM-DD').toDate());
           setSelectedTimeTo(moment(response.data?.maxDate, 'YYYY-MM-DD').toDate());
+          setMaxDate(moment(response.data?.maxDate, 'YYYY-MM-DD').toDate());
+          setMinDate(moment(response.data?.minDate, 'YYYY-MM-DD').toDate())
 
           // stateContext(response.data?.stateSales)
           console.log(response.data?.stateSales, "stateContext");
@@ -97,7 +101,7 @@ const TimePicker = () => {
             <label htmlFor="timeFrom" className="text-lg font-semibold">
               Select Time From:
             </label>
-            <DatePicker selected={selectedTimeFrom} minDate={selectedTimeFrom} onChange={(date: Date | null) => setSelectedTimeFrom(date)} />
+            <DatePicker selected={selectedTimeFrom} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} />
 
           </div>
 
@@ -106,7 +110,7 @@ const TimePicker = () => {
             <label htmlFor="timeTo" className="text-lg font-semibold">
               Select Time To:
             </label>
-            <DatePicker selected={selectedTimeTo} maxDate={selectedTimeTo} onChange={(date: Date | null) => setSelectedTimeTo(date)} />
+            <DatePicker selected={selectedTimeTo} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} />
           </div>
         </div>
       </div>
