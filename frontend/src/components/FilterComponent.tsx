@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext, Dispatch, SetStateAction } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import api from '../api/api';
+// export const DataContext = createContext({})
+// export const DataContext = createContext<DataContextProps | undefined>(undefined);
+export const DataContext = React.createContext<DataContextProps>({
+  salesData: [],
+  setSalesData: () => {}, // Provide a default function if needed
+});
+interface DataContextProps {
+  salesData: any[]; // Adjust the type accordingly
+  setSalesData: Dispatch<SetStateAction<any[]>>;
+}
+
 
 const TimePicker = () => {
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);
@@ -18,6 +29,7 @@ const TimePicker = () => {
         const response = await api.get('/states');
         setUniqueStates(response.data?.states);
         setSelectedState(response.data?.states[0]);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -25,7 +37,8 @@ const TimePicker = () => {
 
     fetchData();
   }, []);
-
+  // const stateContext: any = useContext(DataContext);
+  const stateContext = useContext(DataContext);
   useEffect(() => {
     const fetchDates = async () => {
       try {
@@ -38,7 +51,11 @@ const TimePicker = () => {
           // Parse the date string into a Date object
           setSelectedTimeFrom(moment(response.data?.minDate, 'YYYY-MM-DD').toDate());
           setSelectedTimeTo(moment(response.data?.maxDate, 'YYYY-MM-DD').toDate());
-          // setSelectedTimeTo(response.data?.maxDate);
+
+          // stateContext(response.data?.stateSales)
+          console.log(response.data?.stateSales, "stateContext");
+          
+          stateContext && stateContext.setSalesData(response.data?.stateSales)
         }
       } catch (error) {
         console.error('Error fetching dates:', error);

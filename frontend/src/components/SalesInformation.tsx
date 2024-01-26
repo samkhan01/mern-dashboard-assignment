@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { DataContext } from './FilterComponent';
 
 const SalesInformation = () => {
+    const { salesData } = useContext(DataContext);
+
+    const calculateAndFormatTotal = (property: string): string => {
+        const total = salesData.reduce((accumulator, currentValue) => accumulator + currentValue[property], 0);
+        return total.toLocaleString('en-US', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+        });
+    };
+
+    const totalSales = calculateAndFormatTotal('Sales');
+    const totalQuantity = calculateAndFormatTotal('Quantity');
+    const totalDiscount = calculateAndFormatTotal('Discount');
+    const totalProfit = calculateAndFormatTotal('Profit');
+
     return (
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100" fill="#000000">
-  <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" fill="transparent" />
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-family="Arial" fill="black">₹</text>
-</svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100" fill="#000000">
+                    <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" fill="transparent" />
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-family="Arial" fill="black">₹</text>
+                </svg>
                 <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Today's Money</p>
-                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">$53k</h4>
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Sales</p>
+                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">${totalSales}</h4>
                 </div>
-                <div className="border-t border-blue-gray-50 p-4">
-                    <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                        <strong className="text-green-500">+55%</strong>&nbsp;than last week
-                    </p>
-                </div>
+
             </div>
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
@@ -25,14 +38,10 @@ const SalesInformation = () => {
                     </svg>
                 </div>
                 <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Today's Users</p>
-                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">2,300</h4>
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Quantity</p>
+                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{totalQuantity}</h4>
                 </div>
-                <div className="border-t border-blue-gray-50 p-4">
-                    <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                        <strong className="text-green-500">+3%</strong>&nbsp;than last month
-                    </p>
-                </div>
+
             </div>
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
@@ -41,14 +50,10 @@ const SalesInformation = () => {
                     </svg>
                 </div>
                 <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">New Clients</p>
-                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">3,462</h4>
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Discount%</p>
+                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{totalDiscount}</h4>
                 </div>
-                <div className="border-t border-blue-gray-50 p-4">
-                    <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                        <strong className="text-red-500">-2%</strong>&nbsp;than yesterday
-                    </p>
-                </div>
+
             </div>
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                 <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
@@ -57,14 +62,10 @@ const SalesInformation = () => {
                     </svg>
                 </div>
                 <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Sales</p>
-                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">$103,430</h4>
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profit</p>
+                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">${totalProfit}</h4>
                 </div>
-                <div className="border-t border-blue-gray-50 p-4">
-                    <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                        <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
-                    </p>
-                </div>
+
             </div>
         </div>
     )

@@ -1,14 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Dashboard from './dashboard/Dashboard';
+import { DataContext } from './components/FilterComponent';
 
 function App() {
+  const [salesData, setSalesData] = React.useState<any[]>([]);
+
   return (
-    <div className="App">
-     
-       <Dashboard />
-    </div>
+    <DataContext.Provider value={{ salesData, setSalesData }}>
+      <div className="App">
+        <Dashboard />
+      </div>
+    </DataContext.Provider>
   );
 }
 

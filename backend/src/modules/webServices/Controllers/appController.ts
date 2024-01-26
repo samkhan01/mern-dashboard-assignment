@@ -27,6 +27,9 @@ class AppController {
         // Filter sales data for the specified state
         const stateSales = salesData.filter((item) => item.State === state);
 
+        console.log(stateSales, "stateSales");
+        
+
         if (stateSales.length === 0) {
             return res.status(404).json({ error: `No data found for the state: ${state}` });
         }
@@ -47,6 +50,7 @@ class AppController {
             state,
             minDate,
             maxDate,
+            stateSales,
         });
 
 
