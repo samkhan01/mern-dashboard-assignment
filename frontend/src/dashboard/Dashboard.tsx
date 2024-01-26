@@ -2,17 +2,47 @@ import React from 'react'
 import PageLayout from '../layouts/PageLayout'
 import TopHeader from '../layouts/TopHeader'
 import SalesInformation from '../components/SalesInformation'
+import SaleByCityCart from '../components/charts/SalesByCityChart'
+import SalesByProductChart from '../components/charts/SalesByProductChart'
+import SalesByCategoryPieChart from '../components/charts/SalesByCategoryChart'
+import SalesBySubCategoryChart from '../components/charts/SalesBySubCategoryChart'
+import SalesBySegmentChart from '../components/charts/SalesBySegment'
 
 const Dashboard = () => {
     return (
         <>
-           
+
             <PageLayout>
 
                 <div className="mt-12">
-                   <SalesInformation />
+                    <SalesInformation />
 
-                   
+                    <div className='chart-container flex'>
+                        <div className='sales-by-city w-[50%]'>
+
+                            <SalesByProductChart />
+
+                        </div>
+                        <div className='sales-by-product w-[50%]'>
+                            <SaleByCityCart />
+
+                        </div>
+                    </div>
+
+                    <div className='pie-chart-container flex'>
+                        <div className='w-[33%]'>
+
+                            <SalesByCategoryPieChart />
+
+                        </div>
+                        <div className='w-[34%]'>
+                            <SalesBySubCategoryChart />
+                        </div>
+                        <div className='w-[34%]'>
+                            <SalesBySegmentChart />
+                        </div>
+
+                    </div>
                 </div>
                 <div className="text-blue-gray-600">
                     <footer className="py-2">
