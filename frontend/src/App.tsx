@@ -3,7 +3,7 @@ import Dashboard from './dashboard/Dashboard';
 import { DataContext } from './components/FilterComponent';
 
 function App() {
-  const [salesData, setSalesData] = React.useState<any[]>([]);
+  const [salesData, setSalesData] = React.useState<[]>([]);
 
   return (
     <DataContext.Provider value={{ salesData, setSalesData }}>

@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { DataContext } from './FilterComponent';
 
+/** Component for display total sales, discount, quentity, profit & loss */
 const SalesInformation = () => {
+    /** Get data from contex */
     const { salesData } = useContext(DataContext);
 
+    /** Function to calculate the result */
     const calculateAndFormatTotal = (property: string): string => {
         const total = salesData.reduce((accumulator, currentValue) => accumulator + currentValue[property], 0);
         return total.toLocaleString('en-US', {
@@ -62,7 +65,7 @@ const SalesInformation = () => {
                     </svg>
                 </div>
                 <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Profit</p>
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">{(totalProfit as unknown as number) > 0 ? "Profit" : "Loss"}</p>
                     <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">${totalProfit}</h4>
                 </div>
 

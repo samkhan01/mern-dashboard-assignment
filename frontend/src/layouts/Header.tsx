@@ -1,11 +1,11 @@
 import React from 'react'
 import Filters from '../components/FilterComponent'
 
+/** Header of the dashboard | calling filter  */
 const Header = () => {
-    return (
-        // <div>Header</div>
-      <Filters />
-    )
+  return (
+    <Filters />
+  )
 }
 
 export default Header
