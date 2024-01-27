@@ -1,29 +1,61 @@
-import React from 'react';
-import ReactECharts from 'echarts-for-react';
+import React, { useContext } from 'react';
+import { DataContext } from '../FilterComponent';
 
-const SalesBySubCategoryChart = () => {
-    const option = {
-        title: {
-            text: 'Sales by sub category',
-        },
-        tooltip: {},
-        yAxis: {
-            type: 'category',
-            data: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'],
-        },
-        xAxis: {
-            type: 'value',
-        },
-        series: [{
-            name: 'Sample Data',
-            type: 'bar',
-            data: [20, 35, 15, 25, 30],
-        }],
-    };
+/** Initilize component to create a pie chart based on the sub categories of products */
+const SalesBySubCategories = () => {
+  const { salesData } = useContext(DataContext);
+  const subCategorySalesMap: { [key: string]: { subCategoryName: string; sales: number } } = {};
 
-    return (
-        <ReactECharts option={option} style={{ height: '400px', width: '100%' }} />
-    );
+  /** Iterate through the data array */
+  salesData.forEach(item => {
+    const subCategoryName = item["Sub-Category"];
+    /** Remove decimal places using Math.floor */
+    const sales = Math.floor(item.Sales);
+
+    /** Check if the subCat name already exists in the map */
+    if (subCategorySalesMap[subCategoryName]) {
+      /** If yes, add the sales to the existing sum */
+      subCategorySalesMap[subCategoryName].sales += sales;
+    } else {
+      /** If no, create a new entry for the subCat with the current sales */
+      subCategorySalesMap[subCategoryName] = {
+        subCategoryName: subCategoryName,
+        sales: sales
+      };
+    }
+  });
+
+  const resultArray = Object.values(subCategorySalesMap);
+
+  resultArray.sort((a, b) => b.sales - a.sales);
+
+  /** Tase the top 10 subCat */
+  const top10subCat = resultArray.slice(0, 10);
+
+  console.log(top10subCat);
+
+  const subCatValueArray = top10subCat.sort((a, b) => a.sales - b.sales);
+
+  return (
+    <div style={{ width: '100%' }} className='bg-[#0f172a]'>
+
+
+      <ul className='bar-charts p-6'>
+        <h3 className='text-white'>Sales by sub Category</h3>
+        <div className='flex justify-between items-center w-full text-white'>
+          <span className='text-left'>sub Category Name</span>
+          <span className='text-right'>Sales in $</span>
+        </div>
+        {subCatValueArray?.map((subCategory: { subCategoryName: string, sales: number }) => (
+          <li className='barchart flex justify-between items-center w-full bg-[#e2e8f0] mt-2'>
+            <span className='text-left p-2'>{subCategory?.subCategoryName}</span>
+            <span className='text-right bg-[#a5f3fc] p-2'>${subCategory?.sales}</span>
+          </li>
+        ))}
+
+      </ul>
+    </div>
+  );
 };
 
-export default SalesBySubCategoryChart;
+export default SalesBySubCategories;

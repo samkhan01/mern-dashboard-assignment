@@ -7,19 +7,16 @@ interface PageLayoutProps {
     children: ReactNode;
 }
 
+/** Component to create page layout */
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
     return (
         <div className="min-h-screen bg-gray-50/50">
             <TopHeader />
             <SideBar />
             <div className="p-4 xl:ml-80">
-
                 <Header />
                 {children}
             </div>
-
-
-
         </div>
     );
 };

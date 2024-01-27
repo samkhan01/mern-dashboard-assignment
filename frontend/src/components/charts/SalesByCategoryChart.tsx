@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { DataContext } from '../FilterComponent';
 
+/** define categories data type  */
+interface CategoryData {
+  value: number;
+  name: string;
+}
+
+/** Compoenent to create the pie chart for the sales by category */
 const SalesByCategoryPieChart = () => {
+  const { salesData } = useContext(DataContext);
+
+  const categorySalesMap: { [key: string]: number } = {};
+
+  /** Iterate through the data array */
+  salesData.forEach(item => {
+    const category = item["Category"];
+    const sales = item.Sales;
+
+    /** Calculate sales */
+    if (categorySalesMap[category]) {
+      categorySalesMap[category] += sales as number;
+    } else {
+      categorySalesMap[category] = sales as number;
+    }
+  });
+
+  /** Convert the map keys to an array to get unique categories */
+  const uniqueCategories = Object.keys(categorySalesMap);
+
+
+  /**  Get the corresponding sales for each unique category and format into an array */
+  const resultArray: CategoryData[] = uniqueCategories.map(category => ({
+    value: categorySalesMap[category],
+    name: category
+  }));
+
+  /** Options for the Chart  */
   const option = {
     title: {
-      text: 'Sales Category',
+      text: 'Sales by Category',
       left: 'center',
     },
     tooltip: {
@@ -14,9 +50,9 @@ const SalesByCategoryPieChart = () => {
     legend: {
       orient: 'horizontal',
       bottom: 10,
-      data: ['Category 1', 'Category 2', 'Category 3'],
+      data: uniqueCategories,
     },
-    color: ['#FFA500', '#0000FF', '#008000'], // Orange, Blue, Green
+    color: ['#0284c7', '#f87171', '#fbbf24'],
     series: [
       {
         name: 'Category',
@@ -37,11 +73,7 @@ const SalesByCategoryPieChart = () => {
         labelLine: {
           show: false,
         },
-        data: [
-          { value: 335, name: 'Category 1' },
-          { value: 310, name: 'Category 2' },
-          { value: 234, name: 'Category 3' },
-        ],
+        data: resultArray
       },
     ],
   };

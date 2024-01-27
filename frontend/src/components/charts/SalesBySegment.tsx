@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { DataContext } from '../FilterComponent';
+interface SegmentData {
+  value: number;
+  name: string;
+}
 
-const SalesBySegmentChart = () => {
+/** Component to create a chart based on the segment of products */
+const SalesBySegmentPieChart = () => {
+  const { salesData } = useContext(DataContext);
+
+  const SegmentSalesMap: { [key: string]: number } = {};
+
+  salesData.forEach(item => {
+    const Segment = item["Segment"];
+    const sales = item.Sales;
+
+    /** Check if the Segment already exists in the map */
+    if (SegmentSalesMap[Segment]) {
+      SegmentSalesMap[Segment] += sales;
+    } else {
+      SegmentSalesMap[Segment] = sales;
+    }
+  });
+
+  /**  Convert the map keys to an array to get unique categories */
+  const uniqueSegment = Object.keys(SegmentSalesMap);
+
+
+  /** Get the corresponding sales for each unique Segment and format into an array */
+  const resultArray: SegmentData[] = uniqueSegment.map(Segment => ({
+    value: SegmentSalesMap[Segment],
+    name: Segment
+  }));
+
   const option = {
     title: {
-      text: 'Sales by segment',
+      text: 'Sales by Segment',
       left: 'center',
     },
     tooltip: {
@@ -14,12 +46,12 @@ const SalesBySegmentChart = () => {
     legend: {
       orient: 'horizontal',
       bottom: 10,
-      data: ['Category 1', 'Category 2', 'Category 3'],
+      data: uniqueSegment,
     },
-    color: ['#FFA500', '#0000FF', '#008000'], // Orange, Blue, Green
+    color: ['#0284c7', '#f87171', '#fbbf24'],
     series: [
       {
-        name: 'Category',
+        name: 'Segment',
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,
@@ -37,11 +69,7 @@ const SalesBySegmentChart = () => {
         labelLine: {
           show: false,
         },
-        data: [
-          { value: 335, name: 'Category 1' },
-          { value: 310, name: 'Category 2' },
-          { value: 234, name: 'Category 3' },
-        ],
+        data: resultArray
       },
     ],
   };
@@ -51,4 +79,4 @@ const SalesBySegmentChart = () => {
   );
 };
 
-export default SalesBySegmentChart;
+export default SalesBySegmentPieChart;

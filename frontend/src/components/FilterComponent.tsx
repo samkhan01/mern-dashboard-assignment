@@ -3,28 +3,35 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import api from '../api/api';
-// export const DataContext = createContext({})
-// export const DataContext = createContext<DataContextProps | undefined>(undefined);
-export const DataContext = React.createContext<DataContextProps>({
-  salesData: [],
-  setSalesData: () => {}, // Provide a default function if needed
-});
+
+/** Create interface for contextdata */
 interface DataContextProps {
-  salesData: any[]; // Adjust the type accordingly
-  setSalesData: Dispatch<SetStateAction<any[]>>;
+  salesData: any[];
+  setSalesData: Dispatch<SetStateAction<[]>>;
 }
 
+/** Create a contex to get the data for the charts & relevent components */
+export const DataContext = React.createContext<DataContextProps>({
+  salesData: [],
+  setSalesData: () => { },
+});
 
-const TimePicker = () => {
+
+
+/** Component for the filter data | Fetching data based on user input | Requesting to server   */
+const FilterComponent = () => {
+  /** Initilize states */
   const [uniqueStates, setUniqueStates] = useState<string[]>([]);
   const [selectedState, setSelectedState] = useState('');
   const [selectedTimeFrom, setSelectedTimeFrom] = useState<Date | null>(null);
   const [selectedTimeTo, setSelectedTimeTo] = useState<Date | null>(null);
   const [maxDate, setMaxDate] = useState<Date | null>(null);
   const [minDate, setMinDate] = useState<Date | null>(null);
-  const [dates, setDates] = useState<string[]>([]);
-  const [times, setTimes] = useState<string[]>([]);
 
+  /** Use contex to set result based on filters */
+  const stateContext = useContext(DataContext);
+
+  /** Side effect to fetch the data on first load  */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,27 +46,24 @@ const TimePicker = () => {
 
     fetchData();
   }, []);
-  // const stateContext: any = useContext(DataContext);
-  const stateContext = useContext(DataContext);
+
+  /** Side effect to fetch data when the filters apply */
   useEffect(() => {
     const fetchDates = async () => {
       try {
         if (selectedState) {
           const response = await api.post('/getMinMaxDates', {
             state: selectedState,
+            selectedTimeFrom: selectedTimeFrom ? selectedTimeFrom : minDate,
+
+            selectedTimeTo: selectedTimeTo ? selectedTimeTo : maxDate
           });
-          setDates([response.data.minDate, response.data.maxDate]);
 
-          // Parse the date string into a Date object
-          setSelectedTimeFrom(moment(response.data?.minDate, 'YYYY-MM-DD').toDate());
-          setSelectedTimeTo(moment(response.data?.maxDate, 'YYYY-MM-DD').toDate());
-          setMaxDate(moment(response.data?.maxDate, 'YYYY-MM-DD').toDate());
-          setMinDate(moment(response.data?.minDate, 'YYYY-MM-DD').toDate())
+          /** Set min & max date */
+          setMaxDate(new Date(response.data?.maxDate));
+          setMinDate(new Date(response.data?.minDate));
 
-          // stateContext(response.data?.stateSales)
-          console.log(response.data?.stateSales, "stateContext");
-          
-          stateContext && stateContext.setSalesData(response.data?.stateSales)
+          stateContext && stateContext.setSalesData(response.data?.stateSales);
         }
       } catch (error) {
         console.error('Error fetching dates:', error);
@@ -67,7 +71,8 @@ const TimePicker = () => {
     };
 
     fetchDates();
-  }, [selectedState]);
+  }, [selectedState, selectedTimeTo, selectedTimeFrom]);
+
 
   return (
     <div>
@@ -101,7 +106,7 @@ const TimePicker = () => {
             <label htmlFor="timeFrom" className="text-lg font-semibold">
               Select Time From:
             </label>
-            <DatePicker selected={selectedTimeFrom} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} />
+            <DatePicker selected={selectedTimeFrom ? selectedTimeFrom : minDate} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} />
 
           </div>
 
@@ -110,7 +115,7 @@ const TimePicker = () => {
             <label htmlFor="timeTo" className="text-lg font-semibold">
               Select Time To:
             </label>
-            <DatePicker selected={selectedTimeTo} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} />
+            <DatePicker selected={selectedTimeTo ? selectedTimeTo : maxDate} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} />
           </div>
         </div>
       </div>
@@ -118,4 +123,4 @@ const TimePicker = () => {
   );
 };
 
-export default TimePicker;
+export default FilterComponent;
