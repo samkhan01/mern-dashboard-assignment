@@ -3,7 +3,7 @@ import { DataContext } from '../FilterComponent';
 
 /** Component to create a custom chart for the sales based on products */
 const SalesByProductsChart = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
   const productSalesMap: { [key: string]: { productName: string; sales: number } } = {};
 
   /** Iterate through the data array */
@@ -35,19 +35,19 @@ const SalesByProductsChart = () => {
 
 
   return (
-    <div style={{ width: '100%' }} className='bg-[#0f172a]'>
+    <div style={{ width: '100%' }}>
 
 
-      <ul className='bar-charts p-6'>
-        <h3 className='text-white'>Sales by Products</h3>
-        <div className='flex justify-between items-center w-full text-white'>
+      <ul className='bar-charts p-2'>
+        <h3 className={darkTheme ? 'text-white' : 'text-black'}>Sales by Products</h3>
+        <div className={darkTheme ? 'flex justify-between items-center w-full text-white' : 'flex justify-between items-center w-full text-black'}>
           <span className='text-left'>Product Name</span>
           <span className='text-right'>Sales in $</span>
         </div>
-        {ProductsValueArray?.map((product: { productName: string, sales: number }) => (
-          <li className='barchart flex justify-between items-center w-full bg-[#e2e8f0] mt-2'>
-            <span className='text-left p-2'>{product?.productName}</span>
-            <span className='text-right bg-[#a5f3fc] p-2'>${product?.sales}</span>
+        {ProductsValueArray?.map((product: { productName: string, sales: number }, index: number) => (
+          <li className={'barchart text-black flex justify-between items-center w-full bg-[#ecfeff] mt-2'} key={index}>
+            <span className='text-left p-1'>{product?.productName}</span>
+            <span className='text-right bg-[#a5f3fc] p-1 w-24'>${product?.sales}</span>
           </li>
         ))}
 

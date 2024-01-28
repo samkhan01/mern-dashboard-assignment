@@ -45,7 +45,7 @@ class AppController {
             }
 
             /* Extract dates from the filtered sales data for min & max date. */
-            const dates = stateSales.map((item) => new Date(item["Order Date"]).getTime());
+            const dates =  stateSales.map((item) => new Date(item["Order Date"]).getTime());
 
             if (dates.length === 0) {
                 return res.status(404).json({ message: `No valid dates found for the state: ${state}` });

@@ -10,7 +10,7 @@ interface CategoryData {
 
 /** Compoenent to create the pie chart for the sales by category */
 const SalesByCategoryPieChart = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
 
   const categorySalesMap: { [key: string]: number } = {};
 
@@ -41,7 +41,10 @@ const SalesByCategoryPieChart = () => {
   const option = {
     title: {
       text: 'Sales by Category',
-      left: 'center',
+      // left: 'center',
+      textStyle: {
+        color: darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
+      },
     },
     tooltip: {
       trigger: 'item',
@@ -51,6 +54,9 @@ const SalesByCategoryPieChart = () => {
       orient: 'horizontal',
       bottom: 10,
       data: uniqueCategories,
+      textStyle: {
+        color: darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
+      },
     },
     color: ['#0284c7', '#f87171', '#fbbf24'],
     series: [
@@ -62,24 +68,27 @@ const SalesByCategoryPieChart = () => {
         label: {
           show: false,
           position: 'center',
+          // color: '#67e8f9',
         },
         emphasis: {
           label: {
             show: true,
             fontSize: '25',
             fontWeight: 'bold',
+            // color: '#67e8f9',
           },
         },
         labelLine: {
           show: false,
         },
-        data: resultArray
+        data: resultArray,
       },
     ],
   };
+  
 
   return (
-    <ReactECharts option={option} style={{ height: '400px', width: '100%' }} />
+    <ReactECharts option={option} style={{ width: '100%' }} />
   );
 };
 

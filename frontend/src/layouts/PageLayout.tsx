@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Header from './Header';
 import { SideBar } from './SideBar';
 import TopHeader from './TopHeader';
@@ -9,13 +9,22 @@ interface PageLayoutProps {
 
 /** Component to create page layout */
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
+    const [isSidebarShow, setSidebarShow] = useState<boolean>(true);
     return (
-        <div className="min-h-screen bg-gray-50/50">
-            <TopHeader />
-            <SideBar />
-            <div className="p-4 xl:ml-80">
+        <div className="min-h-screen">
+            <TopHeader {...{ isSidebarShow, setSidebarShow }} />
+            {isSidebarShow && <div className={isSidebarShow ? "show" : ""}>
+
+                <SideBar />
+            </div>
+            }
+
+            <div className={isSidebarShow ? "isSidebarShow xl:ml-60" : "p-4 xl:ml-10"}>
                 <Header />
-                {children}
+                <div>
+
+                    {children}
+                </div>
             </div>
         </div>
     );

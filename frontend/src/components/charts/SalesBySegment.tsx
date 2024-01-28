@@ -8,7 +8,7 @@ interface SegmentData {
 
 /** Component to create a chart based on the segment of products */
 const SalesBySegmentPieChart = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
 
   const SegmentSalesMap: { [key: string]: number } = {};
 
@@ -37,7 +37,10 @@ const SalesBySegmentPieChart = () => {
   const option = {
     title: {
       text: 'Sales by Segment',
-      left: 'center',
+      // left: 'center',
+      textStyle: {
+        color:  darkTheme ? '#f1f5f9' : '#000000', 
+      },
     },
     tooltip: {
       trigger: 'item',
@@ -47,6 +50,9 @@ const SalesBySegmentPieChart = () => {
       orient: 'horizontal',
       bottom: 10,
       data: uniqueSegment,
+      textStyle: {
+        color: darkTheme ? '#f1f5f9' : '#000000', 
+      },
     },
     color: ['#0284c7', '#f87171', '#fbbf24'],
     series: [
@@ -75,7 +81,7 @@ const SalesBySegmentPieChart = () => {
   };
 
   return (
-    <ReactECharts option={option} style={{ height: '400px', width: '100%' }} />
+    <ReactECharts option={option} style={{ width: '100%' }} />
   );
 };
 
