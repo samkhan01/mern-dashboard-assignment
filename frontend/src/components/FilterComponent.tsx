@@ -55,7 +55,7 @@ const FilterComponent = () => {
 
     bodyElement.classList.add('dark-theme');
     /** Cleanup function to remove the default theme class on unmount */
-   
+
   }, []);
 
   /** Side effect to fetch data when the filters apply */
@@ -74,6 +74,7 @@ const FilterComponent = () => {
           setMaxDate(new Date(response.data?.maxDate));
           setMinDate(new Date(response.data?.minDate));
 
+
           stateContext && stateContext.setSalesData(response.data?.stateSales);
         }
       } catch (error) {
@@ -90,9 +91,14 @@ const FilterComponent = () => {
 
     return new Intl.DateTimeFormat('en-GB', options).format(date);
   };
-  
-  console.log(stateContext.darkTheme, "darkTheme");
-  
+
+
+/** Set select dates null whenever state change to bind min & max date , Show min & max date as */
+  useEffect(() => {
+    setSelectedTimeFrom(null);
+    setSelectedTimeTo(null)
+  }, [selectedState]);
+
   return (
     <div>
       <div className="flex filter-section">
@@ -102,14 +108,14 @@ const FilterComponent = () => {
         </div>
 
         <div className='section-right-container filter flex flex-row justify-content: flex-end;'>
-          
+
           <div>
             <label className={stateContext.darkTheme ? "text-white" : "text-black"}>
               Select State:
             </label>
             <select
               id="state"
-              className={stateContext.darkTheme ?"p-2 focus:outline-none focus:border-blue-500 state-select" : "p-2 border focus:outline-none focus:border-blue-500 light-theme-input text-black"}
+              className={stateContext.darkTheme ? "p-2 focus:outline-none focus:border-blue-500 state-select" : "p-2 border focus:outline-none focus:border-blue-500 light-theme-input text-black"}
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
             >
@@ -128,7 +134,7 @@ const FilterComponent = () => {
             </label>
             <DatePicker selected={selectedTimeFrom ? selectedTimeFrom : minDate} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} className='date-picker'
               customInput={
-                <div className={stateContext.darkTheme ? "custom-datepicker-input date-picker flex" : "custom-datepicker-input-light date-picker-light flex" }>
+                <div className={stateContext.darkTheme ? "custom-datepicker-input date-picker flex" : "custom-datepicker-input-light date-picker-light flex"}>
                   <input
                     type="text"
                     value={selectedTimeFrom ? moment(selectedTimeFrom).format('DD-MMMM-YYYY') : minDate ? moment(minDate).format('DD-MMMM-YYYY') : ""}
@@ -148,10 +154,10 @@ const FilterComponent = () => {
               Select Time To:
             </label>
             <DatePicker selected={selectedTimeTo ? selectedTimeTo : maxDate} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} className="date-picker-to date-picker" customInput={
-              <div className={stateContext.darkTheme ? "custom-datepicker-input date-picker flex" : "custom-datepicker-input-light date-picker-light flex" }>
+              <div className={stateContext.darkTheme ? "custom-datepicker-input date-picker flex" : "custom-datepicker-input-light date-picker-light flex"}>
                 <input
                   type="text"
-                  value={selectedTimeTo ? moment(selectedTimeTo).format('DD-MMMM-YYYY') : maxDate ? moment(maxDate).format('DD-MMMM-YYYY') : ""}
+                  value={selectedTimeTo ? moment(selectedTimeTo).format('DD-MMMM-YYYY') : minDate ? moment(maxDate).format('DD-MMMM-YYYY') : ""}
                   readOnly
                 />
                 <AiOutlineDown className="array-icon" onClick={(e) => e.stopPropagation()} />
