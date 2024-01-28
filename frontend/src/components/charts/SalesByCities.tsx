@@ -78,7 +78,7 @@ const SalesByCitiesChar = () => {
         stack: 'barStack',
         itemStyle: {
           normal: {
-            color: '#409eff',
+            color: '#a5f3fc',
           },
         },
         data: percentageSalesArray
@@ -90,7 +90,7 @@ const SalesByCitiesChar = () => {
         stack: 'barStack',
         itemStyle: {
           normal: {
-            color: '#b0b0b0',
+            color: '#ecfeff',
           },
         },
         data: percentageSalesArray
@@ -100,10 +100,10 @@ const SalesByCitiesChar = () => {
     textStyle: {
       color: '#000',
     },
-    backgroundColor: '#808080',
+   
   };
 
-  return <ReactEcharts option={options} style={{ height: '300px', width: '100%' }} />;
+  return <ReactEcharts option={options} style={{ height: '100vh', width: '100%' }} />;
 };
 
 export default SalesByCitiesChar;

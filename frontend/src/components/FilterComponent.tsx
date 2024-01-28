@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import api from '../api/api';
+// import { FaLongArrowAltDown, FaLongArrowAltRight } from 'react-icons/fa';
+import { AiOutlineDown } from 'react-icons/ai';
 
 /** Create interface for contextdata */
 interface DataContextProps {
@@ -73,23 +75,30 @@ const FilterComponent = () => {
     fetchDates();
   }, [selectedState, selectedTimeTo, selectedTimeFrom]);
 
+  const formatDate = (date: Date) => {
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+    console.log(options, 'options');
+
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+  };
 
   return (
     <div>
-      <div className="flex">
-        <div className='left-heading p-4'>
-          <h3>Sales Overview</h3>
+      <div className="flex filter-section">
+
+        <div className='left-heading filter-left-section'>
+          <h2>Sales Overview</h2>
         </div>
 
-        <div className='right-container filter flex flex-row space-x-4 p-4'>
+        <div className='section-right-container filter flex flex-row justify-content: flex-end;'>
           {/* State Dropdown */}
           <div>
-            <label htmlFor="state" className="text-lg font-semibold">
+            <label>
               Select State:
             </label>
             <select
               id="state"
-              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className="p-2 focus:outline-none focus:border-blue-500 state-select"
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
             >
@@ -103,19 +112,42 @@ const FilterComponent = () => {
 
           {/* Time From Dropdown */}
           <div>
-            <label htmlFor="timeFrom" className="text-lg font-semibold">
+            <label>
               Select Time From:
             </label>
-            <DatePicker selected={selectedTimeFrom ? selectedTimeFrom : minDate} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} />
+            <DatePicker selected={selectedTimeFrom ? selectedTimeFrom : minDate} minDate={minDate} onChange={(date: Date | null) => setSelectedTimeFrom(date)} className='date-picker'
+              customInput={
+                <div className="custom-datepicker-input date-picker flex">
+                  <input
+                    type="text"
+                    value={selectedTimeFrom ? moment(selectedTimeFrom).format('DD-MMMM-YYYY') : minDate ? moment(minDate).format('DD-MMMM-YYYY') : ""}
+                    readOnly
+                  />
+                  <AiOutlineDown className="array-icon margin-auto" onClick={(e) => e.stopPropagation()} />
+
+                </div>
+              }
+            />
 
           </div>
 
           {/* Time To Dropdown */}
           <div>
-            <label htmlFor="timeTo" className="text-lg font-semibold">
+            <label htmlFor="timeTo">
               Select Time To:
             </label>
-            <DatePicker selected={selectedTimeTo ? selectedTimeTo : maxDate} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} />
+            <DatePicker selected={selectedTimeTo ? selectedTimeTo : maxDate} maxDate={maxDate} onChange={(date: Date | null) => setSelectedTimeTo(date)} className="date-picker-to date-picker" customInput={
+              <div className="custom-datepicker-input date-picker flex">
+                <input
+                  type="text"
+                  value={selectedTimeTo ? moment(selectedTimeTo).format('DD-MMMM-YYYY') : maxDate ? moment(maxDate).format('DD-MMMM-YYYY') : ""}
+                  readOnly
+                />
+                <AiOutlineDown className="array-icon" onClick={(e) => e.stopPropagation()} />
+
+              </div>
+            } />
+
           </div>
         </div>
       </div>

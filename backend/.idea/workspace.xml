@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="78d8d8ee-d394-4234-9c2e-011efce7411c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/bk/tamplate.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SalesInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SalesInformation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/charts/SalesByCities.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/charts/SalesByCities.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/charts/SalesByProductsChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/charts/SalesByProductsChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/charts/SalesBySubCategoryChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/charts/SalesBySubCategoryChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/dashboard/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/PageLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/PageLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/SideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/SideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/TopHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/TopHeader.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2bZNBbIzWwaX5Fy6tncvxEoKZps" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78d8d8ee-d394-4234-9c2e-011efce7411c" name="Changes" comment="" />
+      <created>1706418528492</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706418528492</updated>
+    </task>
+    <servers />
+  </component>
+</project>

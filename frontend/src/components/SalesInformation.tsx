@@ -22,50 +22,46 @@ const SalesInformation = () => {
     const totalProfit = calculateAndFormatTotal('Profit');
 
     return (
-        <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100" fill="#000000">
-                    <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2" fill="transparent" />
-                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-family="Arial" fill="black">₹</text>
+        <div className="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 mt-2">
+            <div className=" information-card relative flex justify-center items-center bg-clip-border text-gray-700 shadow-md">
+
+                <svg className='w-12 h-16' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100" fill="#22c55e">
+                    <circle cx="12" cy="12" r="10" stroke="#22c55e" strokeWidth="2" fill="transparent" />
+                    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontFamily="Arial" fill="#22c55e">₹</text>
                 </svg>
-                <div className="p-4 text-right">
+
+                <div className="p-4">
                     <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Sales</p>
-                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">${totalSales}</h4>
+                    <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug">${totalSales}</h4>
                 </div>
 
             </div>
-            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-                <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-6 h-6 text-white">
-                        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <div className="p-4 text-right">
+            <div className=" information-card relative flex justify-center items-center bg-clip-border text-gray-700 shadow-md">
+                <svg className="w-16 h-18 text-green-500 dark:text-green-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M6 14h2m3 0h5M3 7v10c0 .6.4 1 1 1h16c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1H4a1 1 0 0 0-1 1Z" />
+                </svg>
+                <div className="p-4">
                     <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Quantity</p>
                     <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{totalQuantity}</h4>
                 </div>
 
             </div>
-            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-                <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-6 h-6 text-white">
-                        <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
-                    </svg>
-                </div>
-                <div className="p-4 text-right">
+            <div className=" information-card relative flex justify-center items-center bg-clip-border text-gray-700 shadow-md">
+                <svg className="w-12 h-16 text-[#ca8a04] dark:[#ca8a04]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.5 21h13M12 21V7m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm2-1.8c3 .7 2.5 2.8 5 2.8M5 8c3.4 0 2.2-2.1 5-2.8M7 9.6V7.8m0 1.8-2 4.3a.8.8 0 0 0 .4 1l.4.1h2.4a.8.8 0 0 0 .8-.7V14L7 9.6Zm10 0V7.3m0 2.3-2 4.3a.8.8 0 0 0 .4 1l.4.1h2.4a.8.8 0 0 0 .8-.7V14l-2-4.3Z" />
+                </svg>
+                <div className="p-4">
                     <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Discount%</p>
                     <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{totalDiscount}</h4>
                 </div>
 
             </div>
-            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-                <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-6 h-6 text-white">
-                        <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
-                    </svg>
-                </div>
-                <div className="p-4 text-right">
-                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">{(totalProfit as unknown as number) > 0 ? "Profit" : "Loss"}</p>
+            <div className=" information-card relative flex justify-center items-center bg-clip-border text-gray-700 shadow-md">
+                <svg className="w-18 h-14 text-[#db485b] dark:text-[#db485b]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 16H5a1 1 0 0 1-1-1V5c0-.6.4-1 1-1h14c.6 0 1 .4 1 1v1M9 12H4m8 8V9h8v11h-8Zm0 0H9m8-4a1 1 0 1 0-2 0 1 1 0 0 0 2 0Z" />
+                </svg>
+                <div className="p-4">
+                    <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">{(parseInt(totalProfit) as unknown as number) >= 0 ? "Profit" : "Loss"}</p>
                     <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">${totalProfit}</h4>
                 </div>
 

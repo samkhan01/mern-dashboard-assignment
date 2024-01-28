@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+    @apply bg-[#0f172a] !important;
+}
+
+.top-header-main {
+    @apply border-b-[0.1px] border-opacity-0
+}
+
+/** Side bar */
+.sidebar-container {
+    @apply border-r-[0.1px]
+}
+
+
+/** filter-section */
+
+.filter-section {
+    @apply text-white
+}
+
+.filter-left-section {
+    @apply w-[20%]
+}
+
+.section-right-container {
+    @apply w-[]
+}
+
+.state-select {
+    @apply bg-[#334155]
+}
+
+.date-picker {
+    @apply bg-[#334155] p-1
+}
+
+.custom-datepicker-input input {
+    @apply bg-[#334155] p-[0.5px]
+}
+
+.information-card {
+    @apply bg-[#334155] text-white
+}
+
+.chart-container {
+    @apply bg-[#334155] text-black p-2
+}

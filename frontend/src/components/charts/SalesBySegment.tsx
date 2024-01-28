@@ -37,7 +37,10 @@ const SalesBySegmentPieChart = () => {
   const option = {
     title: {
       text: 'Sales by Segment',
-      left: 'center',
+      // left: 'center',
+      textStyle: {
+        color: '#f1f5f9', // Set the text color for legend items
+      },
     },
     tooltip: {
       trigger: 'item',
@@ -47,6 +50,9 @@ const SalesBySegmentPieChart = () => {
       orient: 'horizontal',
       bottom: 10,
       data: uniqueSegment,
+      textStyle: {
+        color: '#f1f5f9', // Set the text color for legend items
+      },
     },
     color: ['#0284c7', '#f87171', '#fbbf24'],
     series: [
@@ -75,7 +81,7 @@ const SalesBySegmentPieChart = () => {
   };
 
   return (
-    <ReactECharts option={option} style={{ height: '400px', width: '100%' }} />
+    <ReactECharts option={option} style={{ width: '100%' }} />
   );
 };
 
