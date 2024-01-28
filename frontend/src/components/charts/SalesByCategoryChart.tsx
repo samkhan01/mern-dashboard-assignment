@@ -68,14 +68,14 @@ const SalesByCategoryPieChart = () => {
         label: {
           show: false,
           position: 'center',
-          color: '#67e8f9',
+          // color: '#67e8f9',
         },
         emphasis: {
           label: {
             show: true,
             fontSize: '25',
             fontWeight: 'bold',
-            color: '#67e8f9',
+            // color: '#67e8f9',
           },
         },
         labelLine: {

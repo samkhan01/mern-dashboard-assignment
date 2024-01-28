@@ -39,7 +39,7 @@ const SalesBySegmentPieChart = () => {
       text: 'Sales by Segment',
       // left: 'center',
       textStyle: {
-        color:  darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
+        color:  darkTheme ? '#f1f5f9' : '#000000', 
       },
     },
     tooltip: {
@@ -51,7 +51,7 @@ const SalesBySegmentPieChart = () => {
       bottom: 10,
       data: uniqueSegment,
       textStyle: {
-        color: darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
+        color: darkTheme ? '#f1f5f9' : '#000000', 
       },
     },
     color: ['#0284c7', '#f87171', '#fbbf24'],
