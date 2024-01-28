@@ -10,7 +10,7 @@ interface CategoryData {
 
 /** Compoenent to create the pie chart for the sales by category */
 const SalesByCategoryPieChart = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
 
   const categorySalesMap: { [key: string]: number } = {};
 
@@ -43,7 +43,7 @@ const SalesByCategoryPieChart = () => {
       text: 'Sales by Category',
       // left: 'center',
       textStyle: {
-        color: '#f1f5f9', // Set the text color for legend items
+        color: darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
       },
     },
     tooltip: {
@@ -55,7 +55,7 @@ const SalesByCategoryPieChart = () => {
       bottom: 10,
       data: uniqueCategories,
       textStyle: {
-        color: '#f1f5f9', // Set the text color for legend items
+        color: darkTheme ? '#f1f5f9' : '#000000', // Set the text color for legend items
       },
     },
     color: ['#0284c7', '#f87171', '#fbbf24'],

@@ -3,7 +3,7 @@ import { DataContext } from '../FilterComponent';
 
 /** Initilize component to create a pie chart based on the sub categories of products */
 const SalesBySubCategories = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
   const subCategorySalesMap: { [key: string]: { subCategoryName: string; sales: number } } = {};
 
   /** Iterate through the data array */
@@ -41,8 +41,8 @@ const SalesBySubCategories = () => {
 
 
       <ul className='bar-charts p-2'>
-        <h3 className='text-white'>Sales by sub Category</h3>
-        <div className='flex justify-between items-center w-full text-white'>
+        <h3 className={darkTheme ?'text-white' : 'text-black'}>Sales by sub Category</h3>
+        <div className={darkTheme ? 'flex justify-between items-center w-full text-white' : 'flex justify-between items-center w-full text-black'}>
           <span className='text-left'>sub Category Name</span>
           <span className='text-right'>Sales in $</span>
         </div>

@@ -9,7 +9,7 @@ interface PercentageSale {
 
 /** Component to create chart for the sales based on the cities */
 const SalesByCitiesChar = () => {
-  const { salesData } = useContext(DataContext);
+  const { salesData, darkTheme } = useContext(DataContext);
 
   const percentageSalesArray: PercentageSale[] = [];
 
@@ -40,13 +40,29 @@ const SalesByCitiesChar = () => {
 
 
   const options = {
+    title: {
+      text: 'Sales by City',
+      textStyle: {
+        color: darkTheme ? "#f8fafc" : "#000000", // Set the text color for the title
+      },
+    },
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c}%',
+      textStyle: {
+        color: "#000000", // Set the text color for the tooltip
+      },
     },
     xAxis: {
       type: 'value',
       max: 100,
+      axisLabel: {
+        show: true,
+        color: darkTheme ? "#f8fafc" : "#000000", // Set the text color for yAxis labels
+        fontSize: 12,
+        padding: [0, 0, 0, 0],
+        
+      },
       axis: {
         axisLine: {
           show: false,
@@ -55,14 +71,19 @@ const SalesByCitiesChar = () => {
       splitLine: {
         show: false,
       },
+      textStyle: {
+        color: darkTheme ? "#f8fafc" : "#000000", // Set the text color for xAxis
+      },
     },
     yAxis: {
       type: 'category',
       data: allCityName.slice(0, 8),
       axisLabel: {
         show: true,
-        color: '#fff', // Text color
+        color: darkTheme ? "#f8fafc" : "#000000", // Set the text color for yAxis labels
         fontSize: 12,
+        padding: [0, 0, 0, 0],
+        
       },
       axisLine: {
         show: false, // Hide y-axis line
@@ -70,6 +91,7 @@ const SalesByCitiesChar = () => {
       splitLine: {
         show: false, // Hide y-axis grid lines
       },
+      
     },
     series: [
       {
@@ -81,8 +103,7 @@ const SalesByCitiesChar = () => {
             color: '#a5f3fc',
           },
         },
-        data: percentageSalesArray
-          .map((data) => ({ value: 100 - data.value, name: '' })).slice(0, 10),
+        data: percentageSalesArray.map((data) => ({ value: 100 - data.value, name: '' })).slice(0, 10),
       },
       {
         name: 'Value 2',
@@ -93,17 +114,17 @@ const SalesByCitiesChar = () => {
             color: '#ecfeff',
           },
         },
-        data: percentageSalesArray
-          .map((data) => ({ value: data.value, name: '' })).slice(0, 8),
+        data: percentageSalesArray.map((data) => ({ value: data.value, name: '' })).slice(0, 8),
       },
     ],
     textStyle: {
-      color: '#000',
+      color: "#ecfeff"
     },
-   
+    padding: [12, 12, 12, 12],
   };
+  
 
-  return <ReactEcharts option={options} style={{ height: '100vh', width: '100%' }} />;
+  return <ReactEcharts option={options} style={{ height: '100vh', width: '100%', padding: 12,  }} />;
 };
 
 export default SalesByCitiesChar;

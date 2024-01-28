@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { DataContext } from '../components/FilterComponent';
 
 interface propsData {
   setSidebarShow: (value: boolean) => void;
@@ -7,8 +8,10 @@ interface propsData {
 /** Top header */
 const TopHeader = (props: propsData) => {
   const { setSidebarShow, isSidebarShow } = props;
+  const { darkTheme } = useContext(DataContext);
+
   return (
-    <header className="top-header-main text-white p-2 flex justify-between items-center">
+    <header className={"top-header-main text-white p-2 flex justify-between items-center"} id={!darkTheme ? "header-top-green" : ''}>
       <div className="flex items-center">
         <button onClick={() => setSidebarShow(!isSidebarShow)}>
           <svg
@@ -29,7 +32,7 @@ const TopHeader = (props: propsData) => {
         </button>
 
 
-        <a href="#" className="mr-4">Sales Dashboard</a>
+        <a href="#" className="mr-12 p-2">Sales Dashboard</a>
       </div>
       <div className="flex items-center">
         <a href="#" className="mr-4">Hello Joan</a>
