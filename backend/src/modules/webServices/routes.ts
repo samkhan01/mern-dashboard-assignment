@@ -8,7 +8,7 @@ Router.get("/states", (req, res) => {
 })
 
 /** Router Of the sales data based on user input */
-Router.post("/getMinMaxDates", (req, res) => {
+Router.post("/states-sales", (req, res) => {
     AppControllerInstance.getSalesData(req, res)
 })
 
