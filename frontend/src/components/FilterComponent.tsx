@@ -63,7 +63,7 @@ const FilterComponent = () => {
     const fetchDates = async () => {
       try {
         if (selectedState) {
-          const response = await api.post('/getMinMaxDates', {
+          const response = await api.post('/states-sales', {
             state: selectedState,
             selectedTimeFrom: selectedTimeFrom ? selectedTimeFrom : minDate,
 
